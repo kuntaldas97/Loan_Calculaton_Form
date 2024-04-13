@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Loan Application</title>
+</head>
+<body>
+    <div>
+        <img src="Cash-Credit-Loan.webp" class="img" alt="">
+        <div class="container"> 
+            <h1>Loan Calculation Form</h1>
+            <form id="loanForm" onsubmit="">
+                <div>
+                    <label for="name">Name :</label>
+                    <input type="text" id="name" placeholder="Enter Your Name" required oninput="validation()">
+                    <div id="nameError" class="error"></div>
+                </div> 
+                
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" placeholder="Enter Your Email" required oninput="validation()">   
+                    <div id="emailError" class="error"></div> 
+                </div>
+                <div>
+                    <label for="nationality">Nationality:</label>
+                    <select id="nationality" required>
+                        <option value="" disabled selected>Select Nationality</option>
+                        <option value="indian">Indian</option>
+                        <option value="other">Other</option>
+                    </select><br>
+                </div>
+                <div>
+                    <label for="gender">Gender:</label>
+                    <select id="gender" required>
+                        <option value="" disabled selected>Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="pefer not to say">Pefer not to say</option>
+                        <option value="other">Other</option>
+                    </select><br>
+                </div>
+                <div>
+                    <label for="mobile">Mobile Number:</label>
+                    <input type="tel" id="mobile" pattern="[0-9]{10}" placeholder="Enter Mobile Number" required oninput="validation()"><br>
+                    <span id="msg"></span>
+                </div>
+                <div>
+                    <label for="dateOfBirth">Date Of Birth:</label>
+                    <input type="date" id="dateOfBirth" placeholder="Enter your Date Of Birth" onchange="validation()" required><br>
+                    <span id="dateError"></span>
+                </div>
+                <div>
+                    <label for="age">Age:</label>
+                    <input type="number" id="age" placeholder="Enter Age" onchange="validation()" required><br>
+                    <span id="ageError"></span>
+                </div>
+                <div>
+                    <label for="adhaar">Adhaar Card Number:</label>
+                    <input type="number" id="adhaar" pattern="[0-9]{12}" placeholder="Enter your Adhaar" onchange="validation()" required><br>
+                    <div id="adhaarError" class="error"></div> 
+                </div>
+                <div>
+                    <label for="address">Address:</label>
+                    <input type="text" id="address" placeholder="Enter your address" oninput="validation()" required><br>
+                    <span id="addressError"></span>
+                </div>
+                <label for="loanType">Type of Loan</label>
+                <select id="loanType" name="loanType" onchange="showLoanInfoFields()">
+                    <option value="" selected>Select Loan</option>
+                    <option value="personalLoan">Personal Loan</option>
+                    <option value="homeLoan">Home Loan</option>
+                </select>
+    
+                <div id="personalLoanFields" style="display:none;">
+                    <!-- Fields for Personal Loan -->
+                    <label for="companyName">Company Name</label>
+                    <input type="text" id="companyName" name="companyName" placeholder="Enter Company Name" onchange="validation()" required><br>
+                    <span id="companyNameError"></span>
+    
+                    <label for="totalWorkExperience">Total Work Experience (Years)</label>
+                    <input type="number" id="totalWorkExperience" name="totalWorkExperience" placeholder="Enter Total Experience" onchange="validation()" required><br>
+                    <span id="totalWorkExperienceError"></span>
+
+                    <label for="annualSalary">Annual Salary</label>
+                    <input type="number" id="annualSalary" name="annualSalary" placeholder="Enter Anual Salary" onchange="validation()" required><br>
+                    <span id="annualSalaryError"></span>
+
+                    <label for="loanAmount">Loan Amount</label>
+                    <input type="number" id="loanAmount" name="loanAmount" placeholder="Enter Rquired Loan Amount" onchange="validation()" required><br>
+                    <span id="loanAmountError"></span>
+
+                    <!-- <label for="existingEMI">Existing EMI Amount</label>
+                    <input type="number" id="existingEMI" name="existingEMI" placeholder="Enter EMI Amount" onchange="validation()" required><br>
+                    <span id="existingEMIError"></span> -->
+
+                    <label for="loanDuration">Duration in Months</label>
+                    <select id="loanDuration" name="loanDuration">
+                        <option value="6">6</option>
+                        <option value="12">12</option>
+                        <option value="24">24</option>
+                        <option value="36">36</option>
+                    </select>
+                </div>
+    
+                <div id="homeLoanFields" style="display:none;">
+                    <!-- Fields for Home Loan -->
+                    <label for="propertySqft">Property Sqft</label>
+                    <input type="number" id="propertySqft" name="propertySqft" placeholder="Enter the Area" onchange="validation()" required><br>
+                    <span id="propertySqftError"></span>
+    
+                    <label for="builderName">Builder Name</label>
+                    <input type="text" id="builderName" name="builderName" placeholder="Enter Builder's Name" onchange="validation()" required><br>
+                    <span id="builderNameError"></span>
+    
+                    <label for="propertyValue">Property Value</label>
+                    <input type="number" id="propertyValue" name="propertyValue" placeholder="Enter the Valuation" onchange="validation()" required><br>
+                    <span id="propertyValueError"></span>
+    
+                    <label for="annualSalary">Annual Salary</label>
+                    <input type="number" id="annualSalary" name="annualSalary" placeholder="Enter Anual Salary" onchange="validation()" required><br>
+                    <span id="annualSalaryError"></span>
+
+                    <label for="loanAmount">Loan Amount</label>
+                    <input type="number" id="loanAmount" name="loanAmount" placeholder="Enter Rquired Loan Amount" onchange="validation()" required><br>
+                    <span id="loanAmountError"></span>
+    
+                    <label for="loanDurationHome">Duration in Months</label>
+                    <select id="loanDurationHome" name="loanDurationHome">
+                        <option value="6">6</option>
+                        <option value="12">12</option>
+                        <option value="24">24</option>
+                        <option value="36">36</option>
+                    </select>
+                </div>
+            </form>
+            <button onclick="calculateEMI()">Calculate EMI</button>
+            <div id="result"></div>
+        </div>
+    </div>
+    
+
+    <script src="app2.js"></script>
+</body>
+</html>
